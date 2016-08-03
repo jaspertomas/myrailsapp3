@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  'no': MyString
+  date: 2016-07-17
+  payee: MyString
+  description: MyText
+  amount: 9.99
+
+two:
+  'no': MyString
+  date: 2016-07-17
+  payee: MyString
+  description: MyText
+  amount: 9.99

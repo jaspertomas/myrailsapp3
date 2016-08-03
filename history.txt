@@ -1,0 +1,51 @@
+terminal:
+rails generate scaffold Voucher no:string date:date payee:string description:text amount:decimal
+rake db:migrate
+
+//------------INSTALL BOOTSTRAP------------------------------
+gemfile:
+#comment this out:
+#gem 'sass-rails',   '5.0.2'
+//add this below that
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+
+terminal:
+bundle install
+
+app/assets/javacripts/application.js:
+#add this
+//= require bootstrap-sprockets
+#above this
+//= require_tree .
+
+terminal:
+mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.sass
+
+app/assets/stylesheets/application.css.sass:
+#add this at the bottom
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
+app/views/layouts/application.html.erb
+#replace---------------
+<%= yield %>
+#with---------------
+    <div id="main-container" class="container">
+      <div class="row">
+        <div class="col-xs-3">
+          <h3>Tealeaf Academy Todo</h3>
+        </div>
+        <div class="col-xs-9">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+---------------
+
+config/routes.rb:
+  Rails.application.routes.draw do
+  resources :vouchers
+  root 'vouchers#index'
+  end
+
