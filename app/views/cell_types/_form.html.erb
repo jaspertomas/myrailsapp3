@@ -1,0 +1,29 @@
+<%= form_for(@cell_type) do |f| %>
+  <% if @cell_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cell_type.errors.count, "error") %> prohibited this cell_type from being saved:</h2>
+
+      <ul>
+      <% @cell_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :values %><br>
+    <%= f.text_field :values %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

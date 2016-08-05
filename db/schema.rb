@@ -11,22 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160717033659) do
+ActiveRecord::Schema.define(version: 20160803073955) do
 
-  create_table "voucher_accounts", force: :cascade do |t|
-    t.string   "name",       limit: 255
+  create_table "cell_types", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.string   "values",      limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "cells", force: :cascade do |t|
+    t.integer  "x",          limit: 4
+    t.integer  "y",          limit: 4
+    t.integer  "type_id",    limit: 4
+    t.string   "value",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  create_table "vouchers", force: :cascade do |t|
-    t.string   "no",          limit: 255
-    t.date     "date"
-    t.string   "payee",       limit: 255
-    t.text     "description", limit: 65535
-    t.decimal  "amount",                    precision: 10
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+  create_table "settings", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "value",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

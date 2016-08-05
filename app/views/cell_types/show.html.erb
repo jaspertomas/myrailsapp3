@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cell_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @cell_type.description %>
+</p>
+
+<p>
+  <strong>Values:</strong>
+  <%= @cell_type.values %>
+</p>
+
+<%= link_to 'Edit', edit_cell_type_path(@cell_type) %> |
+<%= link_to 'Back', cell_types_path %>

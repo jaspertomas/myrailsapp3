@@ -7,18 +7,43 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 #Todo.create!(title: 'grocery shopping', notes: 'pickles, eggs, red onion')
-#Todo.create!(title: 'wash the car')
-#Todo.create!(title: 'register kids for school', notes: 'Register Kira for Ruby Junior High and Caleb for Rails High School')
-#Todo.create!(title: 'check engine light', notes: 'The check engine light is on in the Tacoma')
-#Todo.create!(title: 'dog groomers', notes: 'Take Pinky and Redford to the groomers on Wednesday the 23rd')
-VoucherAccount.create!(name: "Travel")
-VoucherAccount.create!(name: "Merchandise Expense")
-VoucherAccount.create!(name: "Supplies & Equipment")
-VoucherAccount.create!(name: "Taxes & Fees")
-VoucherAccount.create!(name: "Medical & Insurance")
-VoucherAccount.create!(name: "Utils - Electricity")
-VoucherAccount.create!(name: "Utils - Water")
-VoucherAccount.create!(name: "Food")
-VoucherAccount.create!(name: "Utils - Landline")
-VoucherAccount.create!(name: "Utils - Mobile")
+CellType.create!(name: 'Plain', description: 'Ordinary floor tile. Sometimes has a chip on it, or a block of dirt, a key, a monster, or some other object.', values: ',Chip,Key,Block,Monster,FireBoots,Flippers')
+CellType.create!(name: 'Door', description: 'Prevents access to portal until all chips have been collected', values: 'Open,Closed')
+CellType.create!(name: 'Portal', description: 'The goal in each puzzle is to reach the portal', values: ',Success')
+CellType.create!(name: 'Wall', description: 'Can\'t go through a wall', values: '')
+
+Cell.create!(x:0,y:0,type_id:4)
+Cell.create!(x:0,y:1,type_id:4)
+Cell.create!(x:0,y:2,type_id:4)
+Cell.create!(x:0,y:3,type_id:4)
+Cell.create!(x:0,y:4,type_id:4)
+
+Cell.create!(x:1,y:0,type_id:4)
+Cell.create!(x:1,y:1,type_id:1,value:"")
+Cell.create!(x:1,y:2,type_id:1,value:"")
+Cell.create!(x:1,y:3,type_id:1,value:"")
+Cell.create!(x:1,y:4,type_id:4)
+
+Cell.create!(x:2,y:0,type_id:4)
+Cell.create!(x:2,y:1,type_id:1,value:"")
+Cell.create!(x:2,y:2,type_id:1,value:"")
+Cell.create!(x:2,y:3,type_id:1,value:"")
+Cell.create!(x:2,y:4,type_id:4)
+
+
+Cell.create!(x:3,y:0,type_id:4)
+Cell.create!(x:3,y:1,type_id:1,value:"")
+Cell.create!(x:3,y:2,type_id:1,value:"")
+Cell.create!(x:3,y:3,type_id:1,value:"")
+Cell.create!(x:3,y:4,type_id:4)
+
+
+Cell.create!(x:4,y:0,type_id:4)
+Cell.create!(x:4,y:1,type_id:1,value:"")
+Cell.create!(x:4,y:2,type_id:1,value:"")
+Cell.create!(x:4,y:3,type_id:3,value:"")
+Cell.create!(x:4,y:4,type_id:4)
+
+Setting.create!(name:"Chips",value:"0")
+Setting.create!(name:"ChipsNeeded",value:"0")
 

@@ -1,0 +1,14 @@
+
+#Settings:
+rails generate scaffold Setting name:string value:string
+
+#Cells and Cell Types:
+rails generate scaffold Cell x:integer y:integer type_id:integer value:string
+rails generate scaffold CellType name:string description:string values:string
+rails generate scaffold Inventory name:string qty:integer # to be built manually
+
+rake db:create
+rake db:migrate
+rake db:seed
+
+
