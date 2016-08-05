@@ -1,10 +1,10 @@
 class Setting < ActiveRecord::Base
   def Setting.fetchAllAsHash()
-    @settings = {}
+    settings = {}
     Setting.all.each do |s|
-      @settings[s.name]=s
+      settings[s.name]=s
     end
-    return @settings
+    return settings
   end
 
 end

@@ -5,8 +5,6 @@ class CellsController < ApplicationController
     params.permit(:command)
     
     @settings = Setting.fetchAllAsHash
-    @x=@settings['X'].value.to_i;
-    @y=@settings['Y'].value.to_i;
 
     command=params[:command]
     case command
@@ -21,46 +19,12 @@ class CellsController < ApplicationController
     commandsetting.value=command
     commandsetting.save
     
-    case command
-      #if command is valid
-      when "up";
-        cell=Cell.where(x: @x).where(y: @y-1).take
-        if(cell.cell_type_id!=4)#is not a wall
-          @settings['Y'].value=(@y-1).to_s
-          @settings['Y'].save
-        end
-      when "down";
-        cell=Cell.where(x: @x).where(y: @y+1).take
-        if(cell.cell_type_id!=4)#is not a wall
-          @settings['Y'].value=(@y+1).to_s
-          @settings['Y'].save
-        end
-      when "left";
-        cell=Cell.where(x: @x-1).where(y: @y).take
-        if(cell.cell_type_id!=4)#is not a wall
-          @settings['X'].value=(@x-1).to_s
-          @settings['X'].save
-        end
-      when "right"; 
-        cell=Cell.where(x: @x+1).where(y: @y).take
-        if(cell.cell_type_id!=4)#is not a wall
-          @settings['X'].value=(@x+1).to_s
-          @settings['X'].save
-        end
-    end    
-    
+    process_command(command)
     
     redirect_to cells_dashboard_url
   end
   def dashboard
-    @rows = []
-
-    @cells = Cell.all
-    @cells.each do |cell|
-      @rows[cell.x]||=[]
-      @rows[cell.x][cell.y]=cell
-    end
-
+    @cells = Cell.fetchAllAsNestedArray
     @settings = Setting.fetchAllAsHash
     @x=@settings['X'].value.to_i;
     @y=@settings['Y'].value.to_i;
@@ -135,5 +99,31 @@ class CellsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cell_params
       params.require(:cell).permit(:x, :y, :type_id, :value)
+    end
+    
+    def process_command(command)
+      @x=@settings['X'].value.to_i;
+      @y=@settings['Y'].value.to_i;
+      
+      case command
+        #if command is valid
+        #if command is up, update y = y - 1 unless cell with coordinates (x,y-1) is a wall
+        #cell_type_id=4 means wall
+        when "up";
+          next_cell=Cell.where(x: @x).where(y: @y-1).take          
+          @settings['Y'].update({value:(@y-1).to_s}) if(next_cell.cell_type_id!=4)
+        #if command is down, update y = y + 1 unless cell with coordinates (x,y+1) is a wall
+        when "down";
+          next_cell=Cell.where(x: @x).where(y: @y+1).take
+          @settings['Y'].update({value:(@y+1).to_s}) if(next_cell.cell_type_id!=4)
+        #if command is left, update x = x - 1 unless cell with coordinates (x-1,y) is a wall
+        when "left";
+          next_cell=Cell.where(x: @x-1).where(y: @y).take
+          @settings['X'].update({value:(@x-1).to_s}) if(next_cell.cell_type_id!=4)
+        when "right"; 
+        #if command is right, update x = x + 1 unless cell with coordinates (x+1,y) is a wall
+          next_cell=Cell.where(x: @x+1).where(y: @y).take
+          @settings['X'].update({value:(@x+1).to_s}) if(next_cell.cell_type_id!=4)
+      end    
     end
 end
