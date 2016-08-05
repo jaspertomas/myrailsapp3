@@ -46,4 +46,7 @@ Cell.create!(x:4,y:4,type_id:4)
 
 Setting.create!(name:"Chips",value:"0")
 Setting.create!(name:"ChipsNeeded",value:"0")
+Setting.create!(name:"X",value:"1")
+Setting.create!(name:"Y",value:"1")
+Setting.create!(name:"Command",value:"")
 

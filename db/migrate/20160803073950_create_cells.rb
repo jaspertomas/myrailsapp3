@@ -3,7 +3,6 @@ class CreateCells < ActiveRecord::Migration
     create_table :cells do |t|
       t.integer :x
       t.integer :y
-      t.integer :type_id
       t.string :value
 
       t.timestamps null: false

@@ -1,18 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Dashboard</h1>
-
-<table>
+<table border=1>
     <% (0..4).each do |i| %>
       <tr>
     <% (0..4).each do |j| %>
-        <td><%= @rows[i][j].type_id %></td>
+        <td align=center <% 
+        if(@y==i && @x==j)
+          concat "bgcolor=red" 
+        end 
+        %>> <%= @rows[i][j].cell_type.name %> </td>
     <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<% @stats.each do |name,setting| %>
-<br><%= name %>:<%= setting.value %>:
+<hr>
+
+<% @settings.each do |name,setting| %>
+<br><%= name %>:<%= setting.value %>
 <% end %>
+
+<hr>
+
+<%= link_to "Up", cells_processDashboard_url+"?command=up" %><br>
+<%= link_to "Down", cells_processDashboard_url+"?command=down" %><br>
+<%= link_to "Left", cells_processDashboard_url+"?command=left" %><br>
+<%= link_to "Right", cells_processDashboard_url+"?command=right" %><br>
+<%= link_to "Wait", cells_processDashboard_url+"?command=foo" %><br>
+

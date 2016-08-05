@@ -1,6 +1,57 @@
 class CellsController < ApplicationController
   before_action :set_cell, only: [:show, :edit, :update, :destroy]
 
+  def processDashboard
+    params.permit(:command)
+    
+    @settings = Setting.fetchAllAsHash
+    @x=@settings['X'].value.to_i;
+    @y=@settings['Y'].value.to_i;
+
+    command=params[:command]
+    case command
+      #if command is valid
+      when "up","down","left","right"; 
+      else 
+        command=""
+    end    
+    
+    #update command setting
+    commandsetting=@settings["Command"]
+    commandsetting.value=command
+    commandsetting.save
+    
+    case command
+      #if command is valid
+      when "up";
+        cell=Cell.where(x: @x).where(y: @y+1).take
+        if(cell.cell_type_id!=4)#is not a wall
+          @settings['Y'].value=(@y-1).to_s
+          @settings['Y'].save
+        end
+      when "down";
+        cell=Cell.where("x = "+@x.to_s+" and y = "+(@y+1).to_s).take
+        if(cell.cell_type_id!=4)#is not a wall
+          @settings['Y'].value=(@y+1).to_s
+          @settings['Y'].save
+        end
+      when "left";
+        cell=Cell.where("x = "+(@x-1).to_s+" and y = "+@y.to_s).take
+        if(cell.cell_type_id!=4)#is not a wall
+          @settings['X'].value=(@x-1).to_s
+          @settings['X'].save
+        end
+      when "right"; 
+        cell=Cell.where("x = "+(@x+1).to_s+" and y = "+@y.to_s).take
+        if(cell.cell_type_id!=4)#is not a wall
+          @settings['X'].value=(@x+1).to_s
+          @settings['X'].save
+        end
+    end    
+    
+    
+    redirect_to cells_dashboard_url
+  end
   def dashboard
     @rows = []
 
@@ -10,11 +61,9 @@ class CellsController < ApplicationController
       @rows[cell.x][cell.y]=cell
     end
 
-    @stats = {}
-    @settings = Setting.all
-    @settings.each do |setting|
-      @stats[setting.name]=setting
-    end
+    @settings = Setting.fetchAllAsHash
+    @x=@settings['X'].value.to_i;
+    @y=@settings['Y'].value.to_i;
   end
 
   # GET /cells
