@@ -24,25 +24,25 @@ class CellsController < ApplicationController
     case command
       #if command is valid
       when "up";
-        cell=Cell.where(x: @x).where(y: @y+1).take
+        cell=Cell.where(x: @x).where(y: @y-1).take
         if(cell.cell_type_id!=4)#is not a wall
           @settings['Y'].value=(@y-1).to_s
           @settings['Y'].save
         end
       when "down";
-        cell=Cell.where("x = "+@x.to_s+" and y = "+(@y+1).to_s).take
+        cell=Cell.where(x: @x).where(y: @y+1).take
         if(cell.cell_type_id!=4)#is not a wall
           @settings['Y'].value=(@y+1).to_s
           @settings['Y'].save
         end
       when "left";
-        cell=Cell.where("x = "+(@x-1).to_s+" and y = "+@y.to_s).take
+        cell=Cell.where(x: @x-1).where(y: @y).take
         if(cell.cell_type_id!=4)#is not a wall
           @settings['X'].value=(@x-1).to_s
           @settings['X'].save
         end
       when "right"; 
-        cell=Cell.where("x = "+(@x+1).to_s+" and y = "+@y.to_s).take
+        cell=Cell.where(x: @x+1).where(y: @y).take
         if(cell.cell_type_id!=4)#is not a wall
           @settings['X'].value=(@x+1).to_s
           @settings['X'].save
