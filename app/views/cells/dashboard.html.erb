@@ -6,11 +6,13 @@
     <% (0..4).each do |i| %>
       <tr>
     <% (0..4).each do |j| %>
-        <td><%= j %><%= i %></td>
+        <td><%= @rows[i][j].type_id %></td>
     <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-
+<% @stats.each do |name,setting| %>
+<br><%= name %>:<%= setting.value %>:
+<% end %>

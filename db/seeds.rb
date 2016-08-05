@@ -34,14 +34,14 @@ Cell.create!(x:2,y:4,type_id:4)
 Cell.create!(x:3,y:0,type_id:4)
 Cell.create!(x:3,y:1,type_id:1,value:"")
 Cell.create!(x:3,y:2,type_id:1,value:"")
-Cell.create!(x:3,y:3,type_id:1,value:"")
+Cell.create!(x:3,y:3,type_id:3,value:"")
 Cell.create!(x:3,y:4,type_id:4)
 
 
 Cell.create!(x:4,y:0,type_id:4)
-Cell.create!(x:4,y:1,type_id:1,value:"")
-Cell.create!(x:4,y:2,type_id:1,value:"")
-Cell.create!(x:4,y:3,type_id:3,value:"")
+Cell.create!(x:4,y:1,type_id:4)
+Cell.create!(x:4,y:2,type_id:4)
+Cell.create!(x:4,y:3,type_id:4)
 Cell.create!(x:4,y:4,type_id:4)
 
 Setting.create!(name:"Chips",value:"0")

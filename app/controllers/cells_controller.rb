@@ -2,7 +2,19 @@ class CellsController < ApplicationController
   before_action :set_cell, only: [:show, :edit, :update, :destroy]
 
   def dashboard
+    @rows = []
+
     @cells = Cell.all
+    @cells.each do |cell|
+      @rows[cell.x]||=[]
+      @rows[cell.x][cell.y]=cell
+    end
+
+    @stats = {}
+    @settings = Setting.all
+    @settings.each do |setting|
+      @stats[setting.name]=setting
+    end
   end
 
   # GET /cells
