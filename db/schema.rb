@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803073955) do
+ActiveRecord::Schema.define(version: 20160806000000) do
 
   create_table "cell_types", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20160803073955) do
   create_table "cells", force: :cascade do |t|
     t.integer  "x",            limit: 4
     t.integer  "y",            limit: 4
-    t.integer  "type_id",      limit: 4
     t.string   "value",        limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
